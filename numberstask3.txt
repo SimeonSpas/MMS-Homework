@@ -1,0 +1,14 @@
+5
+6
+20
+69
+82
+36
+156
+724
+35
+65
+//cat numberstask3.txt | sort -n | tail -n 1 (nai golqmo)
+//cat numberstask3.txt | sort -n | head -n 1 (nai malko)
+
+
