@@ -1,0 +1,434 @@
+	.file	"cars1.c"
+	.text
+	.globl	randint
+	.type	randint, @function
+randint:
+.LFB5:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movl	%edi, -4(%rbp)
+	movl	%esi, -8(%rbp)
+	call	rand@PLT
+	movl	%eax, %edx
+	movl	-8(%rbp), %eax
+	subl	-4(%rbp), %eax
+	leal	1(%rax), %ecx
+	movl	%edx, %eax
+	cltd
+	idivl	%ecx
+	movl	-4(%rbp), %eax
+	addl	%edx, %eax
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE5:
+	.size	randint, .-randint
+	.globl	randreal
+	.type	randreal, @function
+randreal:
+.LFB6:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movsd	%xmm0, -8(%rbp)
+	movsd	%xmm1, -16(%rbp)
+	call	rand@PLT
+	cvtsi2sd	%eax, %xmm0
+	movsd	.LC0(%rip), %xmm1
+	divsd	%xmm1, %xmm0
+	movapd	%xmm0, %xmm1
+	movsd	-16(%rbp), %xmm0
+	subsd	-8(%rbp), %xmm0
+	mulsd	%xmm1, %xmm0
+	addsd	-8(%rbp), %xmm0
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE6:
+	.size	randreal, .-randreal
+	.globl	myrandname
+	.type	myrandname, @function
+myrandname:
+.LFB7:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$48, %rsp
+	movq	%rdi, -40(%rbp)
+	movl	$0, -20(%rbp)
+	movl	$90, %esi
+	movl	$65, %edi
+	call	randint
+	movl	%eax, %ecx
+	movl	-20(%rbp), %eax
+	leal	1(%rax), %edx
+	movl	%edx, -20(%rbp)
+	movslq	%eax, %rdx
+	movq	-40(%rbp), %rax
+	addq	%rdx, %rax
+	movl	%ecx, %edx
+	movb	%dl, (%rax)
+	movl	$10, %esi
+	movl	$4, %edi
+	call	randint
+	movl	%eax, -8(%rbp)
+	movl	$0, -16(%rbp)
+	jmp	.L6
+.L7:
+	movl	$122, %esi
+	movl	$97, %edi
+	call	randint
+	movl	%eax, %ecx
+	movl	-20(%rbp), %eax
+	leal	1(%rax), %edx
+	movl	%edx, -20(%rbp)
+	movslq	%eax, %rdx
+	movq	-40(%rbp), %rax
+	addq	%rdx, %rax
+	movl	%ecx, %edx
+	movb	%dl, (%rax)
+	addl	$1, -16(%rbp)
+.L6:
+	movl	-16(%rbp), %eax
+	cmpl	-8(%rbp), %eax
+	jl	.L7
+	movl	-20(%rbp), %eax
+	leal	1(%rax), %edx
+	movl	%edx, -20(%rbp)
+	movslq	%eax, %rdx
+	movq	-40(%rbp), %rax
+	addq	%rdx, %rax
+	movb	$32, (%rax)
+	movl	$90, %esi
+	movl	$65, %edi
+	call	randint
+	movl	%eax, %ecx
+	movl	-20(%rbp), %eax
+	leal	1(%rax), %edx
+	movl	%edx, -20(%rbp)
+	movslq	%eax, %rdx
+	movq	-40(%rbp), %rax
+	addq	%rdx, %rax
+	movl	%ecx, %edx
+	movb	%dl, (%rax)
+	movl	$10, %esi
+	movl	$4, %edi
+	call	randint
+	movl	%eax, -4(%rbp)
+	movl	$0, -12(%rbp)
+	jmp	.L8
+.L9:
+	movl	$122, %esi
+	movl	$97, %edi
+	call	randint
+	movl	%eax, %ecx
+	movl	-20(%rbp), %eax
+	leal	1(%rax), %edx
+	movl	%edx, -20(%rbp)
+	movslq	%eax, %rdx
+	movq	-40(%rbp), %rax
+	addq	%rdx, %rax
+	movl	%ecx, %edx
+	movb	%dl, (%rax)
+	addl	$1, -12(%rbp)
+.L8:
+	movl	-12(%rbp), %eax
+	cmpl	-4(%rbp), %eax
+	jl	.L9
+	movl	-20(%rbp), %eax
+	leal	1(%rax), %edx
+	movl	%edx, -20(%rbp)
+	movslq	%eax, %rdx
+	movq	-40(%rbp), %rax
+	addq	%rdx, %rax
+	movb	$0, (%rax)
+	movq	-40(%rbp), %rax
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE7:
+	.size	myrandname, .-myrandname
+	.globl	compareModelASC
+	.type	compareModelASC, @function
+compareModelASC:
+.LFB8:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$32, %rsp
+	movq	%rdi, -24(%rbp)
+	movq	%rsi, -32(%rbp)
+	movq	-24(%rbp), %rax
+	movq	%rax, -16(%rbp)
+	movq	-32(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	movq	-8(%rbp), %rdx
+	movq	-16(%rbp), %rax
+	movq	%rdx, %rsi
+	movq	%rax, %rdi
+	call	strcmp@PLT
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE8:
+	.size	compareModelASC, .-compareModelASC
+	.globl	compareModelDESC
+	.type	compareModelDESC, @function
+compareModelDESC:
+.LFB9:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$32, %rsp
+	movq	%rdi, -24(%rbp)
+	movq	%rsi, -32(%rbp)
+	movq	-24(%rbp), %rax
+	movq	%rax, -16(%rbp)
+	movq	-32(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	movq	-16(%rbp), %rdx
+	movq	-8(%rbp), %rax
+	movq	%rdx, %rsi
+	movq	%rax, %rdi
+	call	strcmp@PLT
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE9:
+	.size	compareModelDESC, .-compareModelDESC
+	.globl	compareMaxSpeedASC
+	.type	compareMaxSpeedASC, @function
+compareMaxSpeedASC:
+.LFB10:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	movq	%rdi, -24(%rbp)
+	movq	%rsi, -32(%rbp)
+	movq	-24(%rbp), %rax
+	movq	%rax, -16(%rbp)
+	movq	-32(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	movq	-16(%rbp), %rax
+	movzbl	21(%rax), %eax
+	movzbl	%al, %edx
+	movq	-8(%rbp), %rax
+	movzbl	21(%rax), %eax
+	movzbl	%al, %eax
+	subl	%eax, %edx
+	movl	%edx, %eax
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE10:
+	.size	compareMaxSpeedASC, .-compareMaxSpeedASC
+	.globl	compareMaxSpeedDESC
+	.type	compareMaxSpeedDESC, @function
+compareMaxSpeedDESC:
+.LFB11:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	movq	%rdi, -24(%rbp)
+	movq	%rsi, -32(%rbp)
+	movq	-24(%rbp), %rax
+	movq	%rax, -16(%rbp)
+	movq	-32(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	movq	-8(%rbp), %rax
+	movzbl	21(%rax), %eax
+	movzbl	%al, %edx
+	movq	-16(%rbp), %rax
+	movzbl	21(%rax), %eax
+	movzbl	%al, %eax
+	subl	%eax, %edx
+	movl	%edx, %eax
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE11:
+	.size	compareMaxSpeedDESC, .-compareMaxSpeedDESC
+	.globl	comparePriceASC
+	.type	comparePriceASC, @function
+comparePriceASC:
+.LFB12:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	movq	%rdi, -24(%rbp)
+	movq	%rsi, -32(%rbp)
+	movq	-24(%rbp), %rax
+	movq	%rax, -16(%rbp)
+	movq	-32(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	movq	-16(%rbp), %rax
+	movsd	24(%rax), %xmm0
+	movq	-8(%rbp), %rax
+	movsd	24(%rax), %xmm1
+	subsd	%xmm1, %xmm0
+	movq	.LC1(%rip), %xmm1
+	andpd	%xmm1, %xmm0
+	movsd	.LC2(%rip), %xmm1
+	ucomisd	%xmm0, %xmm1
+	jbe	.L27
+	movl	$0, %eax
+	jmp	.L19
+.L27:
+	movq	-16(%rbp), %rax
+	movsd	24(%rax), %xmm1
+	movq	-8(%rbp), %rax
+	movsd	24(%rax), %xmm0
+	ucomisd	%xmm1, %xmm0
+	jbe	.L28
+	movl	$-1, %eax
+	jmp	.L19
+.L28:
+.L19:
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE12:
+	.size	comparePriceASC, .-comparePriceASC
+	.globl	comparePriceDESC
+	.type	comparePriceDESC, @function
+comparePriceDESC:
+.LFB13:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	movq	%rdi, -24(%rbp)
+	movq	%rsi, -32(%rbp)
+	movq	-24(%rbp), %rax
+	movq	%rax, -16(%rbp)
+	movq	-32(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	movq	-16(%rbp), %rax
+	movsd	24(%rax), %xmm0
+	movq	-8(%rbp), %rax
+	movsd	24(%rax), %xmm1
+	subsd	%xmm1, %xmm0
+	movq	.LC1(%rip), %xmm1
+	andpd	%xmm1, %xmm0
+	movsd	.LC2(%rip), %xmm1
+	ucomisd	%xmm0, %xmm1
+	jbe	.L37
+	movl	$0, %eax
+	jmp	.L29
+.L37:
+	movq	-16(%rbp), %rax
+	movsd	24(%rax), %xmm0
+	movq	-8(%rbp), %rax
+	movsd	24(%rax), %xmm1
+	ucomisd	%xmm1, %xmm0
+	jbe	.L38
+	movl	$-1, %eax
+	jmp	.L29
+.L38:
+.L29:
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE13:
+	.size	comparePriceDESC, .-comparePriceDESC
+	.section	.rodata
+.LC3:
+	.string	"%s\t"
+.LC4:
+	.string	"%d\t"
+.LC5:
+	.string	"%.2lf\n"
+	.text
+	.globl	printInfo
+	.type	printInfo, @function
+printInfo:
+.LFB14:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$16, %rsp
+	movq	%rdi, -8(%rbp)
+	movq	-8(%rbp), %rax
+	movq	%rax, %rsi
+	leaq	.LC3(%rip), %rdi
+	movl	$0, %eax
+	call	printf@PLT
+	movq	-8(%rbp), %rax
+	movzbl	21(%rax), %eax
+	movzbl	%al, %eax
+	movl	%eax, %esi
+	leaq	.LC4(%rip), %rdi
+	movl	$0, %eax
+	call	printf@PLT
+	movq	-8(%rbp), %rax
+	movq	24(%rax), %rax
+	movq	%rax, -16(%rbp)
+	movsd	-16(%rbp), %xmm0
+	leaq	.LC5(%rip), %rdi
+	movl	$1, %eax
+	call	printf@PLT
+	nop
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE14:
+	.size	printInfo, .-printInfo
+	.section	.rodata
+	.align 8
+.LC0:
+	.long	4290772992
+	.long	1105199103
+	.align 16
+.LC1:
+	.long	4294967295
+	.long	2147483647
+	.long	0
+	.long	0
+	.align 8
+.LC2:
+	.long	3539053052
+	.long	1062232653
+	.ident	"GCC: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0"
+	.section	.note.GNU-stack,"",@progbits

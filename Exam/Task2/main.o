@@ -1,0 +1,136 @@
+	.file	"main.c"
+	.text
+	.section	.rodata
+.LC2:
+	.string	"%d"
+	.text
+	.globl	main
+	.type	main, @function
+main:
+.LFB5:
+	.cfi_startproc
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	subq	$416, %rsp
+	movq	%fs:40, %rax
+	movq	%rax, -8(%rbp)
+	xorl	%eax, %eax
+	movl	$0, %edi
+	call	time@PLT
+	movl	%eax, %edi
+	call	srand@PLT
+	movq	compareModelASC@GOTPCREL(%rip), %rax
+	movq	%rax, -384(%rbp)
+	movq	compareModelDESC@GOTPCREL(%rip), %rax
+	movq	%rax, -376(%rbp)
+	movq	compareMaxSpeedASC@GOTPCREL(%rip), %rax
+	movq	%rax, -368(%rbp)
+	movq	compareMaxSpeedDESC@GOTPCREL(%rip), %rax
+	movq	%rax, -360(%rbp)
+	movq	comparePriceASC@GOTPCREL(%rip), %rax
+	movq	%rax, -352(%rbp)
+	movq	comparePriceDESC@GOTPCREL(%rip), %rax
+	movq	%rax, -344(%rbp)
+	movl	$0, -392(%rbp)
+	jmp	.L2
+.L3:
+	leaq	-336(%rbp), %rax
+	movl	-392(%rbp), %edx
+	movslq	%edx, %rdx
+	salq	$5, %rdx
+	addq	%rdx, %rax
+	movq	%rax, %rdi
+	call	myrandname@PLT
+	movl	$300, %esi
+	movl	$100, %edi
+	call	randint@PLT
+	movl	%eax, %edx
+	movl	-392(%rbp), %eax
+	cltq
+	salq	$5, %rax
+	addq	%rbp, %rax
+	subq	$315, %rax
+	movb	%dl, (%rax)
+	movsd	.LC0(%rip), %xmm0
+	movq	.LC1(%rip), %rax
+	movapd	%xmm0, %xmm1
+	movq	%rax, -408(%rbp)
+	movsd	-408(%rbp), %xmm0
+	call	randreal@PLT
+	movq	%xmm0, %rax
+	movl	-392(%rbp), %edx
+	movslq	%edx, %rdx
+	salq	$5, %rdx
+	addq	%rbp, %rdx
+	subq	$312, %rdx
+	movq	%rax, (%rdx)
+	addl	$1, -392(%rbp)
+.L2:
+	cmpl	$9, -392(%rbp)
+	jle	.L3
+	leaq	-396(%rbp), %rax
+	movq	%rax, %rsi
+	leaq	.LC2(%rip), %rdi
+	movl	$0, %eax
+	call	__isoc99_scanf@PLT
+	movl	-396(%rbp), %eax
+	testl	%eax, %eax
+	jg	.L4
+	movl	-396(%rbp), %eax
+	cmpl	$6, %eax
+	jle	.L4
+	movl	$0, %eax
+	jmp	.L8
+.L4:
+	movl	-396(%rbp), %eax
+	subl	$1, %eax
+	cltq
+	movq	-384(%rbp,%rax,8), %rdx
+	leaq	-336(%rbp), %rax
+	movq	%rdx, %rcx
+	movl	$32, %edx
+	movl	$10, %esi
+	movq	%rax, %rdi
+	call	qsort@PLT
+	movl	$0, -388(%rbp)
+	jmp	.L6
+.L7:
+	movl	-388(%rbp), %eax
+	cltq
+	salq	$5, %rax
+	movq	%rax, %rdx
+	leaq	-336(%rbp), %rax
+	addq	%rdx, %rax
+	movq	%rax, %rdi
+	call	printInfo@PLT
+	addl	$1, -388(%rbp)
+.L6:
+	cmpl	$9, -388(%rbp)
+	jle	.L7
+	movl	$0, %eax
+.L8:
+	movq	-8(%rbp), %rcx
+	xorq	%fs:40, %rcx
+	je	.L9
+	call	__stack_chk_fail@PLT
+.L9:
+	leave
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE5:
+	.size	main, .-main
+	.section	.rodata
+	.align 8
+.LC0:
+	.long	0
+	.long	1090021888
+	.align 8
+.LC1:
+	.long	0
+	.long	1083129856
+	.ident	"GCC: (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0"
+	.section	.note.GNU-stack,"",@progbits
