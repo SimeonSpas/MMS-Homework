@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <string.h>
+
+char file[20];
+char str[20];
+
+void* routine(void*);
+
+int main(int argc, char** argv){
+    pthread_t th;
+    int count_files = argc - 1;
+    for (int i = 0; i < count_files; i++){
+        char MSG = malloc(sizeof(char));
+        MSG = strcpy(file, (argv[count_files] - 1));
+        if(pthread_create(&th, NULL, routine, MSG)){
+            perror("create");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    for (int i = 0; i < count_files; i++){
+        if(pthread_join(th, NULL)){
+            perror("join");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+
+void* routine(void* arg){
+    char* str = (char*)arg;
+    FILE *fp;
+    while(1){
+        fp = fopen("arg", "r");
+    }
+}
