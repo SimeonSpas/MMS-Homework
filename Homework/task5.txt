@@ -1,0 +1,12 @@
+CC - variable
+src = $(wildcard*.c) - all files with extension .c
+obj = $(src:.c = .o) - all object code files, who have source file with extension .c 
+LDFLAGS - extension for compiler
+myprog : $(obj)
+    gcc -o myprogr.c myprog.o -lm
+
+myprog.o:myprog.c 
+    gcc -o myprog.o -c myprog.c
+.PHONY: clean - dont look for files named clean
+clean:
+    rm -f $(obj)myprog -all files with extension .o who have their source file .c
